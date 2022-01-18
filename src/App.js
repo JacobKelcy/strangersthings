@@ -1,11 +1,19 @@
+import React from "react";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./screens/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <HomeScreen />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+      {/* <HomeScreen /> */}
+    </Router>
   );
 }
 

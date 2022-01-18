@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PostTitle from "../Components/PostTitle";
+import HomeHeader from "../Components/HomeHeader";
+import CreatePost from "../Components/CreatePost";
 
 const HomeScreen = () => {
   const [posts, setPosts] = useState([]);
@@ -25,12 +27,16 @@ const HomeScreen = () => {
   //component wiht the post being passed as props.
 
   return (
-    <div id="main">
-      {posts.map((posts, idx) => {
-        console.log(posts.title);
-        return <PostTitle key={idx} posts={posts} />;
-      })}
-    </div>
+    <>
+      <HomeHeader />
+      <div id="main">
+        {posts.map((posts, idx) => {
+          console.log(posts.title);
+          return <PostTitle key={idx} posts={posts} />;
+        })}
+      </div>
+      <CreatePost />
+    </>
   );
 };
 export default HomeScreen;
