@@ -36,6 +36,9 @@ const HomeScreen = () => {
         })}
       </div>
       <CreatePost />
+      <div id="newPostMain">
+        
+      </div>
     </>
   );
 };

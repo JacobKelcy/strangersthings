@@ -1,18 +1,18 @@
 import React from "react";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./screens/LoginPage";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomeScreen />} />
-
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-      {/* <HomeScreen /> */}
+      <Switch>
+        <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/home" component={HomeScreen} />
+        <Route exact path="/posts" component={HomeScreen} />
+        <Route exact path="/login" component={LoginPage} />
+      </Switch>
     </Router>
   );
 }
