@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-
-const LoginPage = () => {
+import { useHistory } from "react-router-dom";
+const RegisterPage = () => {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
+
+  const history = useHistory();
 
   return (
     <form
@@ -13,14 +15,26 @@ const LoginPage = () => {
         // fetch something and post to a particular endpoint
         try {
           const response = await fetch(
-            "https://strangers-things.herokuapp.com/2109-OKU-RM-WEB-PT/api/login",
+            "https://strangers-things.herokuapp.com/api/2109-OKU-RM-WEB-PT/users/register",
             {
               method: "POST",
-              body: JSON.stringify(form),
+              // headers here says hey resource server, incoming javascript object as string
+              // '{"username":"value","password":"value"}
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user: { ...form },
+              }),
             }
           );
-          const { token } = response.json();
+
+          const resolvedResponse = await response.json();
+          const { data } = resolvedResponse;
+          const { token } = data;
+          // use the message on the frontend for display purposes
           localStorage.setItem("token", token);
+          history.push(`/posts`);
         } catch (err) {
           console.error(err);
         }
@@ -58,8 +72,9 @@ const LoginPage = () => {
           }}
         />
       </div>
+      <input type="submit" value="register me!" />
     </form>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

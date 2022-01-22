@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginPage from "./screens/LoginPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import RegisterPage from "./screens/RegisterPage";
 
 function App() {
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const retrievedTokenFromLocalStorage = localStorage.getItem("token");
+    if (retrievedTokenFromLocalStorage) {
+      setToken(retrievedTokenFromLocalStorage);
+    }
+  }, []);
+
+  console.log("token is: ", token);
+
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={HomeScreen} />
         <Route exact path="/home" component={HomeScreen} />
         <Route exact path="/posts" component={HomeScreen} />
-        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
       </Switch>
     </Router>
   );
